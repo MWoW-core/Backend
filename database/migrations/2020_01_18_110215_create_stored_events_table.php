@@ -12,8 +12,8 @@ final class CreateStoredEventsTable extends Migration
             $table->increments('id');
             $table->uuid('aggregate_uuid')->nullable();
             $table->string('event_class');
-            $table->json('event_properties');
-            $table->json('meta_data');
+            $table->text('event_properties');
+            $table->text('meta_data');
             $table->timestamp('created_at');
             $table->index('event_class');
             $table->index('aggregate_uuid');
