@@ -7,6 +7,8 @@ use App\Hashing\Sha1Hasher;
 use App\News;
 use App\Policies\CommentPolicy;
 use App\Policies\NewsPolicy;
+use App\Policies\RealmlistPolicy;
+use App\Realmlist;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +24,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         News::class => NewsPolicy::class,
-        Comment::class => CommentPolicy::class
+        Comment::class => CommentPolicy::class,
+        Realmlist::class => RealmlistPolicy::class
     ];
 
     /**

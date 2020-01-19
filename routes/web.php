@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\DownloadRealmlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -35,3 +36,5 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 //Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
 //Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 //Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::get('download-realmlist/{realmlist?}', DownloadRealmlistController::class);
