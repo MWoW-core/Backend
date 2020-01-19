@@ -30,4 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'github' => [
+        'deployment_secret' => env('GITHUB_DEPLOYMENT_SECRET')
+    ]
 ];

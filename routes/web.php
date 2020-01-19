@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Middleware\VerifyRequestIsFromGithub;
+use App\Http\Controllers\Webhooks\Github\HandleGithubDeployment;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -38,3 +40,8 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 //Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 Route::get('download-realmlist/{realmlist?}', DownloadRealmlistController::class);
+
+
+Route::middleware(VerifyRequestIsFromGithub::class)->group(static function () {
+    Route::post('/webhooks/github/deploy', HandleGithubDeployment::class);
+});

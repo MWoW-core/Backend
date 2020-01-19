@@ -17,7 +17,8 @@ return [
      */
     'projectors' => [
         \App\Projectors\AccountProjector::class,
-        \App\Projectors\NewsProjector::class
+        \App\Projectors\NewsProjector::class,
+        \App\Projectors\ProcessProjector::class
     ],
 
     /*
