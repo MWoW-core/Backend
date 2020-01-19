@@ -15,6 +15,8 @@ return [
 
     'stateful' => [
         'localhost',
+        'mwow.host',
+        'epic-swartz-733c4c.netlify.com'
     ],
 
     /*
