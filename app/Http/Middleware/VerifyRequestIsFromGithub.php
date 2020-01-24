@@ -18,7 +18,7 @@ class VerifyRequestIsFromGithub
     {
         $signature = GithubSignature::make($request->getContent());
 
-        abort_unless(hash_equals($signature, (string)$request->header('x-hub-signature')), 401, 'Invalid GitBub signature.');
+        abort_unless(hash_equals($signature, (string) $request->header('x-hub-signature')), 401, 'Invalid GitHub signature.');
 
         return $next($request);
     }

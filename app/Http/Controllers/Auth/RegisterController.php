@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Account;
+use App\AccountPassword;
+use App\AccountUsername;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\StorableEvents\AccountRegistered;
@@ -93,8 +95,8 @@ class RegisterController extends Controller
         $now = Date::now()->format('Y-m-d H:i:s');
         Event::dispatch(
             new AccountRegistered([
-                'username' => Str::upper($user->account_name),
-                'sha_pass_hash' => Hash::driver('sha1')->make($request->input('password'), ['name' => $user->account_name]),
+                'username' => $username = AccountUsername::make($user->account_name),
+                'sha_pass_hash' => AccountPassword::make($request->input('password'), $username),
                 'email' => $user->email,
                 'reg_mail' => $user->email,
                 'joindate' => $now,

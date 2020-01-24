@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShowAuthenticatedUser;
 use App\Http\Controllers\NewsController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\NewsCategoryIndex;
 
 Route::middleware('auth:airlock')->group(function () {
     Route::get('/user', ShowAuthenticatedUser::class)->name('user');
+
+    Route::middleware('throttle:3,1')->post('/change-password', ChangePasswordController::class)->name('change-password.store');
 
     Route::post('/news', [NewsController::class, 'store'])->name('news.store');
     Route::match(['PUT', 'PATCH'], '/news/{news}', [NewsController::class, 'update'])->name('news.update');

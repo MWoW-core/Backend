@@ -80,4 +80,14 @@ class User extends Authenticatable implements Commentator
     {
         return false;
     }
+
+    public function account()
+    {
+        return Account::query()->firstWhere('username', $this->account_name);
+    }
+
+    public function storedEvents()
+    {
+        return $this->hasMany(StoredEvent::class, 'meta_data->user_id');
+    }
 }

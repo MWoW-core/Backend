@@ -27,7 +27,7 @@ class NewsResource extends JsonResource
             'headline' => $this->headline,
             'body' => $this->body,
 
-            'created_at' => Date::instance($this->created_at)->toDayDateTimeString()
+            'created_at' => Date::instance($this->created_at)->toDateTimeString()
         ];
     }
 }

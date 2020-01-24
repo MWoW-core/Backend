@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Account;
+use App\AccountPassword;
 use App\Hashing\Sha1Hasher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -33,7 +34,7 @@ class RegisterTest extends TestCase
         $this->assertDatabaseHas('account', [
             'email' => 'john@example.com',
             'username' => Str::upper($username),
-            'sha_pass_hash' => (new Sha1Hasher)->make('password', ['name' => $username]),
+            'sha_pass_hash' => AccountPassword::make('password', $username),
             'reg_mail' => 'john@example.com',
             'last_ip' => '127.0.0.1'
         ], 'auth');
