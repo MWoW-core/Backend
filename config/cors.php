@@ -39,7 +39,8 @@ return [
      */
     'allowed_origins' => [
         'http://localhost:3000',
-        'https://mwow.host'
+        'https://mwow.host',
+        'https://login.mwow.host'
     ],
 
     /*
