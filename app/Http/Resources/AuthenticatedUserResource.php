@@ -29,14 +29,7 @@ class AuthenticatedUserResource extends JsonResource
             'email' => $this->email,
 
             'account' => $this->when($account, fn () => new AccountResource($account)),
-            // 'events' => $this->whenLoaded('storedEvents', fn () => StoredEventResource::collection($this->storedEvents))
-            'events' => StoredEventResource::collection(
-                $this
-                    ->storedEvents()
-                    ->latest()
-                    ->take(15)
-                    ->get()
-            )
+            'events' => $this->whenLoaded('storedEvents', fn () => StoredEventResource::collection($this->storedEvents))
         ];
     }
 }

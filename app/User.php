@@ -88,6 +88,6 @@ class User extends Authenticatable implements Commentator
 
     public function storedEvents()
     {
-        return $this->hasMany(StoredEvent::class, 'meta_data->user_id');
+        return $this->hasMany(StoredEvent::class);
     }
 }

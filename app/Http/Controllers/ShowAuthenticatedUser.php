@@ -10,7 +10,9 @@ class ShowAuthenticatedUser extends Controller
     public function __invoke(Request $request)
     {
         return new AuthenticatedUserResource(
-            $request->user()
+            $request->user()->load([
+                'storedEvents' => fn ($query) => $query->latest()->take(15)
+            ])
         );
     }
 }
