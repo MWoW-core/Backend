@@ -40,7 +40,7 @@ return [
     'allowed_origins' => [
         'http://localhost:3000',
         'https://mwow.host',
-        'https://login.mwow.host'
+        'https://epic-swartz-733c4c.netlify.com'
     ],
 
     /*
