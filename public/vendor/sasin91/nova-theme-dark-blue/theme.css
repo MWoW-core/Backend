@@ -1,0 +1,32 @@
+:root {
+    --primary: rgba(104, 182, 255, 0.5);
+    --primary-dark: rgba(104, 182, 255, 1);
+    --primary-70: rgba(104, 182, 255, 0.7);
+    --primary-50: rgba(104, 182, 255, 0.5);
+    --primary-30: rgba(104, 182, 255, 0.3);
+    --primary-10: rgba(104, 182, 255, 0.1);
+    --logo: rgba(104, 182, 255, 0.5);
+    --sidebar-icon: rgba(104, 182, 255, 0.5);
+}
+
+html {
+    background: #222;
+    filter: invert(100%) contrast(90%) hue-rotate(180deg);
+    height: auto;
+}
+
+img {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
+.w-sidebar * {
+    color: #000;
+}
+
+.bg-grad-sidebar {
+    background-image: linear-gradient(
+        0deg,
+        #fefefe,
+        #ffffff
+    );
+}

@@ -98,7 +98,8 @@ class Account extends Model
         'locked' => 'boolean',
         'online' => 'boolean',
         'vp' => 'integer',
-        'dp' => 'integer'
+        'dp' => 'integer',
+        'expansion' => 'integer'
     ];
 
     protected $enumCasts = [

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property int $writer_id
  * @property string $title
+ * @property string $slug
  * @property string $headline
  * @property string $body
  * @property-read string $link
