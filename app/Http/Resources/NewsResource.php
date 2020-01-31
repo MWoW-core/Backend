@@ -25,6 +25,7 @@ class NewsResource extends JsonResource
                 'id' => $this->writer->id
             ]),
 
+            'comments_count' => $this->comments_count,
             'comments' => $this->whenLoaded('comments', fn() => CommentResource::collection($this->comments)),
 
             'category' => $this->category,
