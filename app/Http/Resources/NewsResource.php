@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class NewsResource extends JsonResource
 {
@@ -16,10 +18,14 @@ class NewsResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->getKey(),
+
             'writer' => $this->whenLoaded('writer', fn() => [
                 'name' => $this->writer->name,
                 'id' => $this->writer->id
             ]),
+
+            'comments' => $this->whenLoaded('comments', fn() => CommentResource::collection($this->comments)),
 
             'category' => $this->category,
             'title' => $this->title,

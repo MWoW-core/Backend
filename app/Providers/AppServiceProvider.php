@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\News;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +30,9 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         JsonResource::withoutWrapping();
+
+        Relation::morphMap([
+            'News' => News::class,
+        ]);
     }
 }

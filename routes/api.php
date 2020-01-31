@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShowAuthenticatedUser;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsCategoryIndex;
+use App\Http\Controllers\ShowAuthenticatedUser;
+use App\Http\Controllers\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,27 @@ use App\Http\Controllers\NewsCategoryIndex;
 Route::middleware('auth:airlock')->group(function () {
     Route::get('/user', ShowAuthenticatedUser::class)->name('user');
 
-    Route::middleware('throttle:3,1')->post('/change-password', ChangePasswordController::class)->name('change-password.store');
+    Route::middleware('throttle:3,1')
+        ->post('/change-password', ChangePasswordController::class)
+        ->name('change-password.store');
 
-    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
-    Route::match(['PUT', 'PATCH'], '/news/{news}', [NewsController::class, 'update'])->name('news.update');
-    Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+    Route::post('/news', [NewsController::class, 'store'])
+        ->name('news.store');
+
+    Route::match(['PUT', 'PATCH'], '/news/{news}', [NewsController::class, 'update'])
+        ->name('news.update');
+
+    Route::delete('/news/{news}', [NewsController::class, 'destroy'])
+        ->name('news.destroy');
+
+    Route::post('comments', [CommentController::class, 'store'])
+        ->name('comments.store');
+
+    Route::match(['PUT', 'PATCH'], '/comments/{comment}', [CommentController::class, 'update'])
+        ->name('comments.update');
+        
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+        ->name('comments.destroy');
 });
 
 Route::get('news-categories', NewsCategoryIndex::class)->name('news-categories');

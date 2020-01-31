@@ -39,6 +39,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Hash::extend('sha1', fn () => new Sha1Hasher());
 
-        Gate::after(fn (User $user) => $user->role->is(UserRole::Admin));
+        Gate::after(fn (User $user) => !!optional($user->role)->is(UserRole::Admin));
     }
 }

@@ -130,10 +130,8 @@ class Account extends Model
 
     public function getStatusAttribute(): string
     {
-        if ($this->bans->isNotEmpty()) {
-            return $this->bans->some->active
-                ? 'Banned'
-                : 'Unbanned';
+        if ($this->bans->some->active) {
+            return 'Banned';
         }
 
         if ($this->online) {

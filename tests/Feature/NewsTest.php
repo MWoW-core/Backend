@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\News;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,17 @@ class NewsTest extends TestCase
         $this->get('/api/news')->assertSuccessful();
     }
 
+    public function testCanViewAnArticleBySlug()
+    {
+        $news = factory(News::class)->create();
+
+        $this->getJson("/api/news/{$news->slug}")
+            ->assertSuccessful()
+            ->assertJsonFragment([
+                'slug' => $news->slug
+            ]);
+    }
+
     public function testCanFilterByCategory()
     {
         factory(News::class)->create(['category' => 'Changelog']);
@@ -28,82 +40,27 @@ class NewsTest extends TestCase
             ->assertDontSee('Patch notes');
     }
 
-    public function testAnAdminCanCreateNews()
+    public function testCanCommentOnANewsArticle()
     {
-        $this
-            ->asAdmin()
-            ->postJson('/api/news', [
-                'category' => 'Changelog',
-                'title' => 'Something spicy',
-                'headline' => 'Liquorice & chili',
-                'body' => 'Gotta fill something.'
-            ])
-            ->assertSuccessful();
+        $article = factory(News::class)->create();
+        $this->be($commentator = factory(User::class)->create());
 
-        $this->assertDatabaseHas('news', [
-            'writer_id' => Auth::id(),
-            'category' => 'Changelog',
-            'title' => 'Something spicy',
-            'headline' => 'Liquorice & chili',
-            'body' => 'Gotta fill something.'
+        $this->json('POST', '/api/comments', [
+            'commentable_type' => 'News',
+            'commentable_id' => $article->id,
+            'comment' => 'hello world'
+        ])->assertSuccessful();
+
+        $this->assertDatabaseHas('comments', [
+            'user_id' => $commentator->id,
+            'commentable_type' => 'News',
+            'commentable_id' => $article->id,
+            'comment' => 'hello world'
         ]);
-    }
 
-    public function testAPlayerCannotCreateNews()
-    {
-        $this->assertGuest()->postJson('/api/news', [])->assertUnauthorized();
-        $this->asPlayer()->postJson('/api/news', [])->assertForbidden();
-    }
-
-    public function testAdminCanUpdateANewsArticle()
-    {
-        $news = factory(News::class)->create();
-
-        $this
-            ->asAdmin()
-            ->putJson("/api/news/{$news->id}", [
-                'category' => 'Changelog',
-                'title' => 'Something spicy',
-                'headline' => 'Liquorice & chili',
-                'body' => 'Gotta fill something.'
-            ])
-            ->assertSuccessful();
-
-        $this->assertDatabaseHas('news', [
-            'id' => $news->id,
-
-            'category' => 'Changelog',
-            'title' => 'Something spicy',
-            'headline' => 'Liquorice & chili',
-            'body' => 'Gotta fill something.'
-        ]);
-    }
-
-    public function testAPlayerCannotUpdateNews()
-    {
-        $news = factory(News::class)->create();
-
-        $this->assertGuest()->putJson("/api/news/{$news->id}", [])->assertUnauthorized();
-        $this->asPlayer()->putJson("/api/news/{$news->id}", [])->assertForbidden();
-    }
-
-    public function testAnAdminCanDeleteANewsArticle()
-    {
-        $news = factory(News::class)->create();
-
-        $this
-            ->asAdmin()
-            ->deleteJson("/api/news/{$news->id}")
-            ->assertSuccessful();
-
-        $this->assertSoftDeleted($news);
-    }
-
-    public function testAPlayerCannotDeleteNews()
-    {
-        $news = factory(News::class)->create();
-
-        $this->assertGuest()->deleteJson("/api/news/{$news->id}", [])->assertUnauthorized();
-        $this->asPlayer()->deleteJson("/api/news/{$news->id}", [])->assertForbidden();
+        self::assertTrue(
+            $article->comments()->where('comment', 'hello world')->where('user_id', $commentator->id)->exists(),
+            'Unable to find comment within News relationship to Comments.'
+        );
     }
 }

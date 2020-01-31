@@ -18,8 +18,8 @@ return [
     'projectors' => [
         \App\Projectors\UserProjector::class,
         \App\Projectors\AccountProjector::class,
-        \App\Projectors\NewsProjector::class,
-        \App\Projectors\ProcessProjector::class
+        \App\Projectors\ProcessProjector::class,
+        \App\Projectors\CommentProjector::class
     ],
 
     /*

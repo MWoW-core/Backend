@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         '/register',
         '/logout',
         '/api/change-password',
-        '/webhooks/github/deploy'
+        '/api/comments',
+        '/webhooks/github/deploy',
     ];
 }

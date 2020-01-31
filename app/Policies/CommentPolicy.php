@@ -43,7 +43,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -55,7 +55,9 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        //
+        if ($comment->commentator->is($user)) {
+            return true;
+        }
     }
 
     /**
@@ -67,7 +69,9 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        //
+        if ($comment->commentator->is($user)) {
+            return true;
+        }
     }
 
     /**
@@ -79,7 +83,9 @@ class CommentPolicy
      */
     public function restore(User $user, Comment $comment)
     {
-        //
+        if ($comment->commentator->is($user)) {
+            return true;
+        }
     }
 
     /**

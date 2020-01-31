@@ -5,13 +5,14 @@
 use App\News;
 use App\User;
 use Faker\Generator as Faker;
+use \Illuminate\Support\Str;
 
 $factory->define(News::class, function (Faker $faker) {
     return [
         'writer_id' => factory(User::class),
-        'category' => $faker->randomElement(['HotFix', null]),
+        'category' => $faker->bs,
         'title' => $title = $faker->catchPhrase,
-        'slug' => \Illuminate\Support\Str::slug($title),
+        'slug' => Str::slug($title),
         'headline' => $faker->bs,
         'body' => '
         <h1>Lorem ipsum dolor sit amet consectetuer adipiscing

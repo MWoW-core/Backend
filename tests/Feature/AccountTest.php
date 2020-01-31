@@ -63,6 +63,6 @@ class AccountTest extends TestCase
 
         $banned->unban();
 
-        self::assertEquals('Unbanned', $banned->status);
+        self::assertEquals('Offline', $banned->status);
     }
 }

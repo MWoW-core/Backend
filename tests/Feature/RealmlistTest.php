@@ -16,8 +16,6 @@ class RealmlistTest extends TestCase
     {
         parent::setUp();
 
-        Realmlist::disableSearchSyncing();
-
         Realmlist::query()->truncate();
     }
 
