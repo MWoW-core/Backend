@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Gate;
 
@@ -20,7 +21,7 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
 
-            'authorization' => transform(Gate::forUser($request->user()), fn (GateContract $gate) => [
+            'authorization' => transform(Gate::forUser(Auth::guard('airlock')->user()), fn (GateContract $gate) => [
                 'update' => $gate->allows('update', $this->resource),
                 'delete' => $gate->allows('delete', $this->resource)
             ]),
