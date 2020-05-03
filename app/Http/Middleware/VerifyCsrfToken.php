@@ -20,5 +20,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/webhooks/github/deploy',
+        '/login',
+        '/register',
+        '/logout'
     ];
 }
