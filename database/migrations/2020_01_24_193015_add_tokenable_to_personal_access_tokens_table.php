@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Laravel\Airlock\PersonalAccessToken;
+use Laravel\Sanctum\PersonalAccessToken;
 use App\User;
 
 class AddTokenableToPersonalAccessTokensTable extends Migration

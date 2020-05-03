@@ -21,7 +21,7 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
 
-            'authorization' => transform(Gate::forUser(Auth::guard('airlock')->user()), fn (GateContract $gate) => [
+            'authorization' => transform(Gate::forUser(Auth::guard('sanctum')->user()), fn (GateContract $gate) => [
                 'update' => $gate->allows('update', $this->resource),
                 'delete' => $gate->allows('delete', $this->resource)
             ]),

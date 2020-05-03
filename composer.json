@@ -12,25 +12,25 @@
         "algolia/algoliasearch-client-php": "^2.5",
         "benjaminhirsch/nova-slug-field": "^1.2",
         "bensampo/laravel-enum": "^1.29",
-        "beyondcode/laravel-comments": "^1.1",
+        "beyondcode/laravel-comments": "dev-master",
         "christophrumpel/nova-notifications": "^1.0",
         "fideloper/proxy": "^4.0",
-        "fruitcake/laravel-cors": "^1.0",
-        "laravel/airlock": "^1.0@dev",
-        "laravel/framework": "^6.2",
-        "laravel/nova": "^2.9",
-        "laravel/scout": "^7.2",
+        "fruitcake/laravel-cors": "^2",
+        "laravel/framework": "^7.0",
+        "laravel/nova": "*",
+        "laravel/sanctum": "^2.2",
+        "laravel/scout": "^8",
         "laravel/tinker": "^2.0",
         "sasin91/nova-theme-dark-blue": "dev-master",
         "simplesquid/nova-enum-field": "^1.1",
-        "spatie/laravel-event-sourcing": "^2.0"
+        "spatie/laravel-event-sourcing": "^3.0"
     },
     "require-dev": {
-        "facade/ignition": "^1.4",
+        "facade/ignition": "^2",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "nunomaduro/collision": "^4.2.0",
+        "phpunit/phpunit": "^9.0"
     },
     "repositories": [
         {

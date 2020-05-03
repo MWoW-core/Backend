@@ -18,7 +18,7 @@ use App\Http\Controllers\ChangePasswordController;
 |
 */
 
-Route::middleware('auth:airlock')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', ShowAuthenticatedUser::class)->name('user');
 
     Route::middleware('throttle:3,1')
@@ -39,7 +39,7 @@ Route::middleware('auth:airlock')->group(function () {
 
     Route::match(['PUT', 'PATCH'], '/comments/{comment}', [CommentController::class, 'update'])
         ->name('comments.update');
-        
+
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
         ->name('comments.destroy');
 });

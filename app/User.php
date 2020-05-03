@@ -15,7 +15,7 @@ use BeyondCode\Comments\Traits\CanComment;
 use BeyondCode\Comments\Contracts\Commentator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Airlock\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User

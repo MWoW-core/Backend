@@ -1,12 +1,8 @@
 <?php
 
-namespace Tests\Unit\Rules;
+namespace Tests\Unit;
 
 use App\Rules\ValidHostname;
-use App\Rules\ValidScriptName;
-use App\Scripts\CreateAccountScript;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ValidHostnameTest extends TestCase

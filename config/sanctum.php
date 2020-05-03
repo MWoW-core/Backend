@@ -13,11 +13,7 @@ return [
     |
     */
 
-    'stateful' => [
-        'localhost',
-        'mwow.host',
-        'epic-swartz-733c4c.netlify.com'
-    ],
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost,127.0.0.1')),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,4 +28,18 @@ return [
 
     'expiration' => null,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Sanctum Middleware
+    |--------------------------------------------------------------------------
+    |
+    | When authenticating your first-party SPA with Sanctum you may need to
+    | customize some of the middleware Sanctum uses while processing the
+    | request. You may change the middleware listed below as required.
+    |
+    */
+
+    'middleware' => [
+        'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
+    ],
 ];
